@@ -13,6 +13,7 @@ resource "aws_launch_configuration" "web-lc" {
   instance_type        = "${var.instance_type}"
   security_groups      = ["${aws_security_group.sg-private.id}"]
   iam_instance_profile = "${aws_iam_instance_profile.web_s3_profile.id}"
+  user_data            = "${var.user_data}"
 
   lifecycle {
     create_before_destroy = true

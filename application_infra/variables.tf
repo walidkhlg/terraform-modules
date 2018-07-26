@@ -18,9 +18,6 @@ variable "asg_max" {}
 variable "asg_min" {}
 variable "asg_capacity" {}
 variable "asg_grace" {}
-
-variable "dbhost" {}
-variable "db_user" {}
-variable "db_password" {}
-variable "db_name" {}
-variable "dbread" {}
+variable "user_data" {
+  default = ""
+}
