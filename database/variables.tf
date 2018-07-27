@@ -11,15 +11,15 @@ variable "db_instance_tags" {
 
 variable "vpc_id" {}
 
-variable "private_sg_id" {}
+variable "security_group_ids" {
+  type = "list"
+}
 
 variable "db_engine" {
   default = "aurora-mysql"
 }
 
 variable "kms_key_id" {}
-
-variable "db_instance_count" {}
 
 variable "db_name" {}
 variable "db_user" {}
