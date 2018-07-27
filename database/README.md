@@ -26,15 +26,17 @@ The ARN of the Kms key to use to encrypt the cluster . Example :
 kms_key_id = "arn:aws:kms:eu-west-1:8547342598703:key/e53256c0-x68a-43245-8412-c2366e565201"
 ```
 ### db_name
-The name of the database .
+The name of the database . Example :
 ```
 db_name = "test_database"
 ```
 ### db_user
-The database master username
+The database master username . Example :
 ```
 db_user = "master"
 ```
 ### db_password
-The database password
-###
+The database password . Example :
+```
+db_password = "examplepassword"
+```
