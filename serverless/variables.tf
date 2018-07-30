@@ -17,7 +17,9 @@ variable "env_var" {
   type = "map"
 }
 
-variable "private_sg_id" {}
+variable "security_groups" {
+  type = "list"
+}
 
 variable "deployment_stage" {}
 variable "lambda_zip_file_name" {}

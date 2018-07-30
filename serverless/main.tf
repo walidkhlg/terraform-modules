@@ -9,7 +9,7 @@ resource "aws_lambda_function" "func1" {
 
   vpc_config {
     subnet_ids         = ["${var.subnet_ids["public1"]}", "${var.subnet_ids["public2"]}"]
-    security_group_ids = ["${var.private_sg_id}"]
+    security_group_ids = "${var.security_groups}"
   }
 
   # Database connection information are passed through environment variables
