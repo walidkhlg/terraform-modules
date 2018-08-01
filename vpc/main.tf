@@ -41,8 +41,6 @@ resource "aws_subnet" "public2_subnet" {
   }
 }
 
-
-
 # private subnets
 resource "aws_subnet" "rds1_subnet" {
   cidr_block              = "${var.cidrs["rds1"]}"

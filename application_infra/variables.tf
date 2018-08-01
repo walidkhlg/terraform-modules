@@ -5,6 +5,7 @@ data "aws_subnet_ids" "private" {
     "airbus:network" = "private"
   }
 }
+
 variable "tags" {
   type = "list"
 }
@@ -18,6 +19,7 @@ variable "asg_max" {}
 variable "asg_min" {}
 variable "asg_capacity" {}
 variable "asg_grace" {}
+
 variable "user_data" {
   default = ""
 }

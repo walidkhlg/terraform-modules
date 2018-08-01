@@ -5,6 +5,7 @@ data "aws_subnet_ids" "local" {
     "airbus:network" = "local"
   }
 }
+
 variable "db_instance_tags" {
   type = "map"
 }

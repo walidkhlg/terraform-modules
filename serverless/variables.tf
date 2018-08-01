@@ -13,6 +13,7 @@ variable "db_read" {}
 variable "subnet_ids" {
   type = "map"
 }
+
 variable "env_var" {
   type = "map"
 }

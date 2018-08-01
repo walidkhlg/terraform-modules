@@ -16,14 +16,16 @@ data "template_file" "userdata" {
 resource "aws_s3_bucket" "logs_bucket" {
   bucket_prefix = "web-ec2-logs-"
   acl           = "private"
+
   server_side_encryption_configuration {
-  rule {
-  apply_server_side_encryption_by_default {
-    kms_master_key_id = "${var.kms_key_id}"
-    sse_algorithm = "aws:kms"
+    rule {
+      apply_server_side_encryption_by_default {
+        kms_master_key_id = "${var.kms_key_id}"
+        sse_algorithm     = "aws:kms"
       }
     }
   }
+
   tags {
     Name = "Instance_log_bucket"
   }
@@ -31,44 +33,48 @@ resource "aws_s3_bucket" "logs_bucket" {
 
 data "template_file" "rendered_log_script" {
   template = "${file("./files/log.sh")}"
+
   vars {
     logs_bucket = "${aws_s3_bucket.logs_bucket.id}"
   }
 }
 
 resource "aws_s3_bucket_object" "logs_script" {
-  bucket  = "${aws_s3_bucket.logs_bucket.id}"
-  key     = "log.sh"
-  source = "${data.template_file.rendered_log_script.rendered}"
+  bucket     = "${aws_s3_bucket.logs_bucket.id}"
+  key        = "log.sh"
+  source     = "${data.template_file.rendered_log_script.rendered}"
   kms_key_id = "${var.kms_key_id}"
+
   tags {
     Name = "logging_script"
   }
 }
+
 #### s3 bucket for application code ####
 resource "aws_s3_bucket" "app_bucket" {
   bucket_prefix = "webapp-"
   acl           = "private"
+
   server_side_encryption_configuration {
     rule {
       apply_server_side_encryption_by_default {
         kms_master_key_id = "${var.kms_key_id}"
-        sse_algorithm = "aws:kms"
-        }
+        sse_algorithm     = "aws:kms"
       }
-    }
-    tags {
-      Name = "Application code bucket"
     }
   }
 
-
+  tags {
+    Name = "Application code bucket"
+  }
+}
 
 resource "aws_s3_bucket_object" "app_package" {
-  bucket  = "${aws_s3_bucket.app_bucket.id}"
-  key     = "App.zip"
-  source = "./files/App.zip"
+  bucket     = "${aws_s3_bucket.app_bucket.id}"
+  key        = "App.zip"
+  source     = "./files/App.zip"
   kms_key_id = "${var.kms_key_id}"
+
   tags {
     Name = "Application package"
   }

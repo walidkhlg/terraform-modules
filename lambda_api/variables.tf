@@ -8,12 +8,11 @@ variable "lambda_zip_file_name" {}
 variable "handler" {}
 variable "lambda_runtime" {}
 variable "lambda_role" {}
+variable "resource_path" {}
 
-variable "env_vars" {
-  type = "map"
-
-  default = {
-    "Name" = "lambda_func"
-  }
+variable "authorization" {
+  default = "NONE"
 }
+
 variable "http_method" {}
+variable "resource_id" {}
