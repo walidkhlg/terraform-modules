@@ -11,12 +11,6 @@ resource "aws_lambda_function" "func" {
   }
 }
 
-resource "aws_api_gateway_resource" "resource" {
-  rest_api_id = "${var.rest_api_id}"
-  parent_id   = "${var.api_root_resource_id}"
-  path_part   = "${var.resource_path}"
-}
-
 resource "aws_api_gateway_method" "gw_method" {
   rest_api_id   = "${var.rest_api_id}"
   resource_id   = "${var.resource_id}"
