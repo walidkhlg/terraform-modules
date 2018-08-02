@@ -1,11 +1,9 @@
 resource "aws_lambda_function" "func" {
   function_name = "${var.function_name}"
-  s3_bucket     = "${var.lambda_s3_bucket}"
-  s3_key        = "${var.lambda_zip_file_name}"
   handler       = "${var.handler}"
   runtime       = "${var.lambda_runtime}"
   role          = "${var.lambda_role}"
-
+  filename      = "${var.filename}"
   environment {
     variables = "${var.env_vars}"
   }
