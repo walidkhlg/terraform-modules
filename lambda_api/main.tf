@@ -1,9 +1,11 @@
 resource "aws_lambda_function" "func" {
-  function_name = "${var.function_name}"
-  handler       = "${var.handler}"
-  runtime       = "${var.lambda_runtime}"
-  role          = "${var.lambda_role}"
-  filename      = "${var.filename}"
+  function_name    = "${var.function_name}"
+  handler          = "${var.handler}"
+  runtime          = "${var.lambda_runtime}"
+  role             = "${var.lambda_role}"
+  filename         = "${var.filename}"
+  source_code_hash = "${base64sha256(file("${var.filename}"))}"
+
   environment {
     variables = "${var.env_vars}"
   }

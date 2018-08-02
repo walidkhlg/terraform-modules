@@ -11,8 +11,10 @@ variable "lambda_role" {}
 variable "authorization" {
   default = "NONE"
 }
+
 variable "env_vars" {
   type = "map"
 }
+
 variable "http_method" {}
 variable "resource_id" {}

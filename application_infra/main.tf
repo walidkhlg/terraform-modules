@@ -33,10 +33,10 @@ resource "aws_autoscaling_group" "web-asg" {
   launch_configuration      = "${aws_launch_configuration.web-lc.name}"
 
   /*tag {
-      key                 = "Name"
-      propagate_at_launch = true
-      value               = "asg-web"
-    }*/
+        key                 = "Name"
+        propagate_at_launch = true
+        value               = "asg-web"
+      }*/
   tags = "${var.tags}"
 }
 
