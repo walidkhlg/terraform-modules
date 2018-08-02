@@ -3,6 +3,7 @@ variable "api_root_resource_id" {}
 variable "api_execution_arn" {}
 
 variable "function_name" {}
+variable "filename" {}
 variable "handler" {}
 variable "lambda_runtime" {}
 variable "lambda_role" {}
