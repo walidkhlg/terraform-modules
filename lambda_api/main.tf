@@ -33,6 +33,10 @@ resource "aws_api_gateway_method_response" "response_method" {
   resource_id = "${var.resource_id}"
   http_method = "${aws_api_gateway_integration.intergration.http_method}"
   status_code = "200"
+
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Origin" = "*"
+  }
 }
 
 resource "aws_api_gateway_integration_response" "response_method_integration" {
@@ -40,6 +44,10 @@ resource "aws_api_gateway_integration_response" "response_method_integration" {
   resource_id = "${var.resource_id}"
   http_method = "${aws_api_gateway_method_response.response_method.http_method}"
   status_code = "${aws_api_gateway_method_response.response_method.status_code}"
+
+  response_parameters = {
+    "method.response.header.Access-Control-Allow-Origin" = "*"
+  }
 }
 
 resource "aws_lambda_permission" "lambda_permission" {
@@ -48,6 +56,4 @@ resource "aws_lambda_permission" "lambda_permission" {
   function_name = "${aws_lambda_function.func.arn}"
   principal     = "apigateway.amazonaws.com"
   source_arn    = "${var.api_execution_arn}/*/*/*"
-
-  #source_arn = "arn:aws:execute-api:${var.aws_region}:${data.aws_caller_identity.current.account_id}:${aws_api_gateway_rest_api.API_GW.id}/*/*/*"
 }
