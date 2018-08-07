@@ -10,6 +10,8 @@ variable "tags" {
   type = "list"
 }
 
+variable "elb_port" {}
+variable "server_port" {}
 variable "iam_role" {}
 variable "instance_type" {}
 variable "vpc_id" {}

@@ -32,11 +32,6 @@ resource "aws_autoscaling_group" "web-asg" {
   vpc_zone_identifier       = ["${data.aws_subnet_ids.private.ids}"]
   launch_configuration      = "${aws_launch_configuration.web-lc.name}"
 
-  /*tag {
-            key                 = "Name"
-            propagate_at_launch = true
-            value               = "asg-web"
-          }*/
   tags = "${var.tags}"
 }
 
@@ -47,9 +42,9 @@ resource "aws_security_group" "sg-elb" {
   vpc_id = "${var.vpc_id}"
 
   ingress {
-    from_port   = 80
+    from_port   = "${var.elb_port}"
     protocol    = "tcp"
-    to_port     = 80
+    to_port     = "${var.elb_port}"
     cidr_blocks = ["0.0.0.0/0"]
   }
 
@@ -70,9 +65,9 @@ resource "aws_security_group" "sg-private" {
   vpc_id = "${var.vpc_id}"
 
   ingress {
-    from_port       = 80
+    from_port       = "${var.server_port}"
     protocol        = "tcp"
-    to_port         = 80
+    to_port         = "${var.server_port}"
     security_groups = ["${aws_security_group.sg-elb.id}"]
   }
 
@@ -154,9 +149,9 @@ resource "aws_elb" "web-elb" {
   internal        = true
 
   listener {
-    instance_port     = 80
+    instance_port     = "${var.server_port}"
     instance_protocol = "http"
-    lb_port           = 80
+    lb_port           = "${var.server_port}"
     lb_protocol       = "http"
   }
 
