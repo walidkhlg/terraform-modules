@@ -31,7 +31,29 @@ chkconfig httpd on
 ```
 Or can be take a file as input .
 ```
-user_data = "${file("./files/userdata.web")}"
+user_data = "${file("./files/userdata.sh")}"
+```
+### elb_port
+The port for the load balancer listener . Examples :
+```
+elb_port = 80
+elb_port = 443
+```
+### elb_protocol
+The protocol to listen on. Valid values are HTTP, HTTPS, TCP, or SSL . Example:
+```
+elb_protocol = "http"
+```
+### instance_port
+The port on the instance to route to . Examples :
+```
+instance_port = 80
+instance_port = 443
+```
+### instance_protocol
+The protocol to use to the instance. Valid values are HTTP, HTTPS, TCP, or SSL . Example :
+```
+instance_protocol = "http"
 ```
 ### asg_max
 The maximum size of the Autoscaling group .

@@ -65,9 +65,9 @@ resource "aws_security_group" "sg-private" {
   vpc_id = "${var.vpc_id}"
 
   ingress {
-    from_port       = "${var.server_port}"
+    from_port       = "${var.instance_port}"
     protocol        = "tcp"
-    to_port         = "${var.server_port}"
+    to_port         = "${var.instance_port}"
     security_groups = ["${aws_security_group.sg-elb.id}"]
   }
 
@@ -150,9 +150,9 @@ resource "aws_elb" "web-elb" {
 
   listener {
     instance_port     = "${var.server_port}"
-    instance_protocol = "http"
+    instance_protocol = "${var.instance_protocol}"
     lb_port           = "${var.server_port}"
-    lb_protocol       = "http"
+    lb_protocol       = "${var.lb_protocol}"
   }
 
   health_check {

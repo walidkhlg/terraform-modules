@@ -15,7 +15,8 @@ variable "server_port" {}
 variable "iam_role" {}
 variable "instance_type" {}
 variable "vpc_id" {}
-
+variable "instance_protocol" {}
+variable "elb_protocol" {}
 variable "launch_ami" {}
 variable "asg_max" {}
 variable "asg_min" {}
