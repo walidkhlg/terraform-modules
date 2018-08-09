@@ -11,7 +11,7 @@ variable "tags" {
 }
 
 variable "elb_port" {}
-variable "server_port" {}
+variable "instance_port" {}
 variable "iam_role" {}
 variable "instance_type" {}
 variable "vpc_id" {}

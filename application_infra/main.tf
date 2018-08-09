@@ -149,10 +149,10 @@ resource "aws_elb" "web-elb" {
   internal        = true
 
   listener {
-    instance_port     = "${var.server_port}"
+    instance_port     = "${var.instance_port}"
     instance_protocol = "${var.instance_protocol}"
-    lb_port           = "${var.server_port}"
-    lb_protocol       = "${var.lb_protocol}"
+    lb_port           = "${var.elb_port}"
+    lb_protocol       = "${var.elb_protocol}"
   }
 
   health_check {
