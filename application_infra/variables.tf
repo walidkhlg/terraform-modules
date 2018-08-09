@@ -24,5 +24,5 @@ variable "asg_capacity" {}
 variable "asg_grace" {}
 
 variable "user_data" {
-  default = ""
+  default = "<shell></shell>"
 }
