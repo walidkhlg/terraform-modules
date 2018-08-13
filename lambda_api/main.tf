@@ -16,8 +16,8 @@ resource "aws_api_gateway_method" "gw_method" {
   resource_id          = "${var.resource_id}"
   http_method          = "${var.http_method}"
   authorization        = "${var.authorization}"
-  request_models       = "${var.has_model == true ? ${var.request_models} : ""}"
-  request_validator_id = "${var.has_model == true ? ${aws_api_gateway_request_validator.request_validator.id} : ""}"
+  request_models       = "${var.has_model == true ? "${var.request_models}" : ""}"
+  request_validator_id = "${var.has_model == true ? "${aws_api_gateway_request_validator.request_validator.id}" : ""}"
 }
 
 resource "aws_api_gateway_integration" "intergration" {
