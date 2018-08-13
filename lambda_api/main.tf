@@ -12,12 +12,25 @@ resource "aws_lambda_function" "func" {
 }
 
 resource "aws_api_gateway_method" "gw_method" {
-  rest_api_id          = "${var.rest_api_id}"
-  resource_id          = "${var.resource_id}"
-  http_method          = "${var.http_method}"
-  authorization        = "${var.authorization}"
-  #request_models       = "${var.has_model == true ? ${var.} : ""}"
-  request_validator_id = "${var.has_model == true ? "${aws_api_gateway_request_validator.request_validator.id}" : ""}"
+  count         = "${var.has_model == false ? 1 : 0}"
+  rest_api_id   = "${var.rest_api_id}"
+  resource_id   = "${var.resource_id}"
+  http_method   = "${var.http_method}"
+  authorization = "${var.authorization}"
+}
+
+resource "aws_api_gateway_method" "gw_method" {
+  count         = "${var.has_model == true ? 1 : 0}"
+  rest_api_id   = "${var.rest_api_id}"
+  resource_id   = "${var.resource_id}"
+  http_method   = "${var.http_method}"
+  authorization = "${var.authorization}"
+
+  request_models = {
+    "application/json" = "${var.model_name}"
+  }
+
+  request_validator_id = "${aws_api_gateway_request_validator.request_validator.id}"
 }
 
 resource "aws_api_gateway_integration" "intergration" {
