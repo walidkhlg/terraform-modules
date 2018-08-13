@@ -12,7 +12,6 @@ resource "aws_lambda_function" "func" {
 }
 
 resource "aws_api_gateway_method" "gw_method" {
-  count         = "${var.has_model == false ? 1 : 0}"
   rest_api_id   = "${var.rest_api_id}"
   resource_id   = "${var.resource_id}"
   http_method   = "${var.http_method}"
