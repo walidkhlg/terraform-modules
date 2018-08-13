@@ -38,9 +38,9 @@ resource "aws_api_gateway_integration" "intergration" {
 
   #resource_id = "${aws_api_gateway_method.gw_method.resource_id}"
   #http_method = "${aws_api_gateway_method.gw_method.http_method}"
-  resource_id = "${var.has_model == true ? ${aws_api_gateway_method.gw_method_with_model.resource_id} : ${aws_api_gateway_method.gw_method.resource_id}}"
+  resource_id = "${var.has_model == true ? "${aws_api_gateway_method.gw_method_with_model.resource_id}" : "${aws_api_gateway_method.gw_method.resource_id}"}"
 
-  http_method = "${var.has_model == true ? ${aws_api_gateway_method.gw_method_with_model.http_method} : ${aws_api_gateway_method.gw_method.http_method}}"
+  http_method = "${var.has_model == true ? "${aws_api_gateway_method.gw_method_with_model.http_method}" : "${aws_api_gateway_method.gw_method.http_method}"}"
 
   integration_http_method = "POST"
   type                    = "AWS_PROXY"
