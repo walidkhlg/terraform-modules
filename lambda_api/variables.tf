@@ -18,15 +18,3 @@ variable "env_vars" {
 
 variable "http_method" {}
 variable "resource_id" {}
-
-variable "has_model" {
-  default = false
-}
-
-variable "model_name" {
-  default = ""
-}
-
-variable "model_file" {
-  default = ""
-}

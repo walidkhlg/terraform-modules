@@ -19,29 +19,10 @@ resource "aws_api_gateway_method" "gw_method" {
   authorization = "${var.authorization}"
 }
 
-resource "aws_api_gateway_method" "gw_method_with_model" {
-  count         = "${var.has_model == true ? 1 : 0}"
-  rest_api_id   = "${var.rest_api_id}"
-  resource_id   = "${var.resource_id}"
-  http_method   = "${var.http_method}"
-  authorization = "${var.authorization}"
-
-  request_models = {
-    "application/json" = "${var.model_name}"
-  }
-
-  request_validator_id = "${aws_api_gateway_request_validator.request_validator.id}"
-}
-
 resource "aws_api_gateway_integration" "intergration" {
   rest_api_id = "${var.rest_api_id}"
-
-  #resource_id = "${aws_api_gateway_method.gw_method.resource_id}"
-  #http_method = "${aws_api_gateway_method.gw_method.http_method}"
-  resource_id = "${var.has_model == true ? "${aws_api_gateway_method.gw_method_with_model.resource_id}" : "${aws_api_gateway_method.gw_method.resource_id}"}"
-
-  http_method = "${var.has_model == true ? "${aws_api_gateway_method.gw_method_with_model.http_method}" : "${aws_api_gateway_method.gw_method.http_method}"}"
-
+  resource_id = "${aws_api_gateway_method.gw_method.resource_id}"
+  http_method = "${aws_api_gateway_method.gw_method.http_method}"
   integration_http_method = "POST"
   type                    = "AWS_PROXY"
   uri                     = "${aws_lambda_function.func.invoke_arn}"
@@ -67,21 +48,4 @@ resource "aws_lambda_permission" "lambda_permission" {
   function_name = "${aws_lambda_function.func.arn}"
   principal     = "apigateway.amazonaws.com"
   source_arn    = "${var.api_execution_arn}/*/*/*"
-}
-
-resource "aws_api_gateway_model" "request_model" {
-  count        = "${var.has_model == true ? 1 : 0}"
-  rest_api_id  = "${var.rest_api_id}"
-  name         = "${var.model_name}"
-  description  = "JSON schema"
-  content_type = "application/json"
-
-  schema = "${file("./models/${var.filename}")}"
-}
-
-resource "aws_api_gateway_request_validator" "request_validator" {
-  count                 = "${var.has_model == true ? 1 : 0}"
-  name                  = "validator"
-  rest_api_id           = "${var.rest_api_id}"
-  validate_request_body = true
 }
