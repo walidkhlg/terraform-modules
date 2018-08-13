@@ -24,5 +24,9 @@ variable "has_model" {
 }
 
 
-variable "model_name" {}
-variable "model_file" {}
+variable "model_name" {
+  default = ""
+}
+variable "model_file" {
+  default = ""
+}

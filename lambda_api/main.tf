@@ -72,7 +72,7 @@ resource "aws_api_gateway_model" "request_model" {
   description  = "JSON schema"
   content_type = "application/json"
 
-  schema = "${file("${var.filename}")}"
+  schema = "${file("./models/${var.filename}")}"
 }
 
 resource "aws_api_gateway_request_validator" "request_validator" {
