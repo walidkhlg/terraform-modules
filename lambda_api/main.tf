@@ -52,7 +52,7 @@ resource "aws_lambda_permission" "lambda_permission" {
 }
 
 resource "aws_api_gateway_request_validator" "validator" {
-  count                       = "${var.validate ? 1 : 0}"
+  count                       = "${var.validate_body ? 1 : 0}"
   name                        = "${var.validator_name}"
   rest_api_id                 = "${var.rest_api_id}"
   validate_request_body       = "${var.validate_body}"
