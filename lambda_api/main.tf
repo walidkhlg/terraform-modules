@@ -16,8 +16,6 @@ resource "aws_api_gateway_method" "gw_method" {
   resource_id        = "${var.resource_id}"
   http_method        = "${var.http_method}"
   authorization      = "${var.authorization}"
-  request_models     = "${var.request_models}"
-  request_parameters = "${var.request_parameters}"
 }
 
 resource "aws_api_gateway_integration" "intergration" {
@@ -49,12 +47,4 @@ resource "aws_lambda_permission" "lambda_permission" {
   function_name = "${aws_lambda_function.func.arn}"
   principal     = "apigateway.amazonaws.com"
   source_arn    = "${var.api_execution_arn}/*/*/*"
-}
-
-resource "aws_api_gateway_request_validator" "validator" {
-  count                       = "${var.validate_body ? 1 : 0}"
-  name                        = "${var.validator_name}"
-  rest_api_id                 = "${var.rest_api_id}"
-  validate_request_body       = "${var.validate_body}"
-  validate_request_parameters = "${var.validate_request_parameters}"
 }
