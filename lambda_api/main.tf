@@ -72,12 +72,12 @@ resource "aws_api_gateway_model" "request_model" {
   description  = "JSON schema"
   content_type = "application/json"
 
-  schema = "${file(${var.model_file})}"
+  schema = "${file("${var.filename}")}"
 }
 
 resource "aws_api_gateway_request_validator" "request_validator" {
   count                 = "${var.has_model == true ? 1 : 0}"
-  name                  = "example"
+  name                  = "validator"
   rest_api_id           = "${var.rest_api_id}"
   validate_request_body = true
 }
