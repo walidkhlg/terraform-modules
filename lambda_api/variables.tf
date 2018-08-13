@@ -11,6 +11,9 @@ variable "lambda_role" {}
 variable "authorization" {
   default = "NONE"
 }
+variable "validate" {
+  default = false
+}
 
 variable "env_vars" {
   type = "map"
