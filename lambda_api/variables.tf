@@ -18,12 +18,12 @@ variable "env_vars" {
 
 variable "request_models" {
   type    = "map"
-  default = {"" = ""}
+  default = null
 }
 
 variable "request_parameters" {
   type    = "map"
-  default = {"" = ""}
+  default = null
 }
 
 variable "validator_name" {
