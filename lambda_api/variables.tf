@@ -23,10 +23,10 @@ variable "has_model" {
   default = false
 }
 
-
 variable "model_name" {
   default = ""
 }
+
 variable "model_file" {
   default = ""
 }
