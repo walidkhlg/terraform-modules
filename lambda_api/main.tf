@@ -12,10 +12,12 @@ resource "aws_lambda_function" "func" {
 }
 
 resource "aws_api_gateway_method" "gw_method" {
-  rest_api_id   = "${var.rest_api_id}"
-  resource_id   = "${var.resource_id}"
-  http_method   = "${var.http_method}"
-  authorization = "${var.authorization}"
+  rest_api_id          = "${var.rest_api_id}"
+  resource_id          = "${var.resource_id}"
+  http_method          = "${var.http_method}"
+  authorization        = "${var.authorization}"
+  request_models       = "${var.has_model == true ? ${var.request_models} : ""}"
+  request_validator_id = "${var.has_model == true ? ${aws_api_gateway_request_validator.request_validator.id} : ""}"
 }
 
 resource "aws_api_gateway_integration" "intergration" {
@@ -48,4 +50,21 @@ resource "aws_lambda_permission" "lambda_permission" {
   function_name = "${aws_lambda_function.func.arn}"
   principal     = "apigateway.amazonaws.com"
   source_arn    = "${var.api_execution_arn}/*/*/*"
+}
+
+resource "aws_api_gateway_model" "request_model" {
+  count        = "${var.has_model == true ? 1 : 0}"
+  rest_api_id  = "${var.rest_api_id}"
+  name         = "${var.model_name}"
+  description  = "JSON schema"
+  content_type = "application/json"
+
+  schema = "${file(${var.model_file})}"
+}
+
+resource "aws_api_gateway_request_validator" "request_validator" {
+  count                 = "${var.has_model == true ? 1 : 0}"
+  name                  = "example"
+  rest_api_id           = "${var.rest_api_id}"
+  validate_request_body = true
 }

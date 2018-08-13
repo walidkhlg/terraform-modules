@@ -18,3 +18,18 @@ variable "env_vars" {
 
 variable "http_method" {}
 variable "resource_id" {}
+
+variable "has_model" {
+  default = false
+}
+
+variable "request_models" {
+  type = "map"
+
+  default = {
+    "application/json" = "${var.model_name}"
+  }
+}
+
+variable "model_name" {}
+variable "model_file" {}
