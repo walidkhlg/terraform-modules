@@ -1,6 +1,6 @@
 # Module database
 
-This module provisions an Autoscaling Group and an Elastic Load Balancer .
+This module provisions an Amazon aurora cluster .
 
 ## Input variables
 This module takes multiple arguments .

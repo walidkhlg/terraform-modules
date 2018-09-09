@@ -9,7 +9,13 @@ data "aws_subnet_ids" "private" {
 variable "tags" {
   type = "list"
 }
-
+variable "bucket_name" {}
+variable "dbhost" {}
+variable "db_user" {}
+variable "db_password" {}
+variable "db_name" {}
+variable "dbreadname" {}
+variable "cloudfront" {}
 variable "elb_port" {}
 variable "instance_port" {}
 variable "iam_role" {}
